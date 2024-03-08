@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "486522265215",
+    "firebase_url": "https://my-application-f7c8e-default-rtdb.firebaseio.com",
+    "project_id": "my-application-f7c8e",
+    "storage_bucket": "my-application-f7c8e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486522265215:android:76a5f7c1a970281cd0e94a",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4QyLUl-u4oWjIEoZCyK84ogh-S2K70lY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486522265215:android:3cc74cfe7fb1ccd3d0e94a",
+        "android_client_info": {
+          "package_name": "com.example.quizapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4QyLUl-u4oWjIEoZCyK84ogh-S2K70lY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
