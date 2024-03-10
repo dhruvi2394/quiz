@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 
+import com.example.quizapplication.Adapters.CategoryAdapters;
 import com.example.quizapplication.Models.CategoryModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -24,9 +25,13 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.example.quizapplication.databinding.ActivityMainBinding;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -37,7 +42,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Date;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -50,11 +56,11 @@ ActivityMainBinding binding;
  EditText InputCategoryName;
  Button uploadCategory;
  View fetchImage;
-
-
  Dialog dialog;
  Uri imageUri;
  int i=0;
+ ArrayList<CategoryModel>list;
+ CategoryAdapters adapters;
  ProgressDialog progressDialog;
 
     @Override
@@ -66,6 +72,7 @@ ActivityMainBinding binding;
 
         database= FirebaseDatabase.getInstance();
         storage= FirebaseStorage.getInstance();
+        list= new ArrayList<>();
 
         dialog=new Dialog(this);
         dialog.setContentView(R.layout.item_add_category_dialog);
@@ -82,6 +89,28 @@ ActivityMainBinding binding;
         InputCategoryName = dialog.findViewById(R.id.InputCategoryName);
         CategoryImage=dialog.findViewById(R.id.CategoryImage);
         fetchImage=dialog.findViewById(R.id.fetchImage);
+
+        GridLayoutManager layoutManager=new GridLayoutManager(this,2);
+        binding.recyCategory.setLayoutManager(layoutManager);
+        adapters=new CategoryAdapters(this,list);
+        database.getReference().child("categories").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists())
+                {
+                    for(DataSnapshot dataSnapshot: snapshot.getChildren())
+                }
+                else
+                {
+                    Toast.makeText(MainActivity.this, "category not exist", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(MainActivity.this,error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         binding.addCategory.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,7 +165,7 @@ ActivityMainBinding binding;
                         CategoryModel categoryModel= new CategoryModel();
                         categoryModel.setCategoryName(InputCategoryName.getText().toString());
                         categoryModel.setSetNum(0);
-                        categoryModel.setCategoryImage(imageUri.toString());
+                        categoryModel.setCategoryImage(uri.toString());
 
                         database.getReference().child("categories").child("category"+i++)
                                 .setValue(categoryModel).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -166,7 +195,7 @@ ActivityMainBinding binding;
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode=1)
+        if(requestCode==1)
         {
             if(data!=null)
             {

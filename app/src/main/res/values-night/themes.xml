@@ -2,6 +2,14 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.QuizApplication" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimary">#6a5be2</item>
+        <item name="colorPrimaryVariant">#FF3700b3</item>
+        <item name="colorOnPrimary">#FF000000</item>
+
+        <item name="colorSecondary">#FF03DAC5</item>
+        <item name="colorSecondaryVariant">#FF03DAC5</item>
+        <item name="colorOnSecondary">#FF000000</item>
+
+        <item name="android:statusBarColor">#6a5be2</item>
     </style>
 </resources>
