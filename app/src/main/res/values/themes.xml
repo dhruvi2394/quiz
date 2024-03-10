@@ -2,8 +2,15 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.QuizApplication" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-    </style>
+        <item name="colorPrimary">#6a5be2</item>
+        <item name="colorPrimaryVariant">#FF3700b3</item>
+        <item name="colorOnPrimary">#FFFFFFFF</item>
 
-    <style name="Theme.QuizApplication" parent="Base.Theme.QuizApplication" />
+        <item name="colorSecondary">#FF03DAC5</item>
+        <item name="colorSecondaryVariant">#FF018786</item>
+        <item name="colorOnSecondary">#FF000000</item>
+
+        <item name="android:statusBarColor">#6a5be2</item>
+
+    </style>
 </resources>
