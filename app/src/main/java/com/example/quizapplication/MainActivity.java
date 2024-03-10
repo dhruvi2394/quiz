@@ -98,7 +98,21 @@ ActivityMainBinding binding;
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists())
                 {
-                    for(DataSnapshot dataSnapshot: snapshot.getChildren())
+                    list.clear();
+                    for(DataSnapshot dataSnapshot: snapshot.getChildren()){     
+                        list.add(new CategoryModel(
+
+                               dataSnapshot.child("CategoryName").getValue().toString(),
+                               dataSnapshot.child("CategoryImage").getValue().toString(),
+                               dataSnapshot.getKey(),
+                               Integer.parseInt(dataSnapshot.child("setNum").getValue().toString())
+
+
+                        ));
+
+                    }
+
+                        
                 }
                 else
                 {
@@ -174,7 +188,7 @@ ActivityMainBinding binding;
 
                                         Toast.makeText(MainActivity.this, "data uploaded", Toast.LENGTH_SHORT).show();
                                         progressDialog.dismiss();
-                                    }
+                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {

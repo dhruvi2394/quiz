@@ -39,6 +39,20 @@ public class CategoryAdapters extends RecyclerView.Adapter<CategoryAdapters.view
             .load(model.getCategoryImage())
             .placeholder(R.drawable.logo)
             .into(holder.binding.categoryImage);
+
+     
+    holder.itemView.setOnClickListener(new View.OnClickListener(){
+        @Override
+        public void onClick(View view){
+         
+              Intent intent = new Intent(context,SetsActivity.class);
+              intent.putExtra(name: "category",nodel.getCategoryName());
+              intent.putExtra(name: "category",nodel.getSetNum());
+              intent.putExtra(name: "category",nodel.getKey());
+
+              context.startActivity(intent);
+        }
+    });
     }
 
     @Override
