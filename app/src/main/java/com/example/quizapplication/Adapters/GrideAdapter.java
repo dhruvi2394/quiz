@@ -14,6 +14,7 @@ public class GrideAdapter extends BaseAdapter{
         this.category=category;
         this.key=key;
         this.listener=listener;
+        int i;
 
     }
 
