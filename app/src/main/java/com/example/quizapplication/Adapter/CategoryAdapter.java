@@ -1,6 +1,7 @@
-package com.example.quizapplication.Adapters;
+package com.example.quizapplication.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,16 +11,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quizapplication.Models.CategoryModel;
 import com.example.quizapplication.R;
+import com.example.quizapplication.SetsActivity;
 import com.example.quizapplication.databinding.ItemCategoryBinding;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class CategoryAdapters extends RecyclerView.Adapter<CategoryAdapters.viewHolder> {
+public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.viewHolder> {
     Context context;
     ArrayList<CategoryModel>list;
 
-    public CategoryAdapters(Context context, ArrayList<CategoryModel> list) {
+    public CategoryAdapter(Context context, ArrayList<CategoryModel> list) {
         this.context = context;
         this.list = list;
     }
@@ -39,6 +41,21 @@ public class CategoryAdapters extends RecyclerView.Adapter<CategoryAdapters.view
             .load(model.getCategoryImage())
             .placeholder(R.drawable.logo)
             .into(holder.binding.categoryImage);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+
+            public void onClick(View view) {
+
+                Intent intent = new Intent(context, SetsActivity.class);
+                intent.putExtra("category", model.getCategoryName());
+                intent.putExtra("sets", model.getSetNum());
+                intent.putExtra("key", model.getKey());
+                context.startActivity(intent);
+
+            }
+
+        });
     }
 
     @Override

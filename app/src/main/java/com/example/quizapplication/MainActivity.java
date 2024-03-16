@@ -8,11 +8,10 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 
-import com.example.quizapplication.Adapters.CategoryAdapters;
+import com.example.quizapplication.Adapter.CategoryAdapter;
 import com.example.quizapplication.Models.CategoryModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,11 +19,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
 
-import androidx.core.view.WindowCompat;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.example.quizapplication.databinding.ActivityMainBinding;
@@ -36,8 +30,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -60,7 +52,7 @@ ActivityMainBinding binding;
  Uri imageUri;
  int i=0;
  ArrayList<CategoryModel>list;
- CategoryAdapters adapters;
+ CategoryAdapter adapter;
  ProgressDialog progressDialog;
 
     @Override
@@ -90,15 +82,25 @@ ActivityMainBinding binding;
         CategoryImage=dialog.findViewById(R.id.CategoryImage);
         fetchImage=dialog.findViewById(R.id.fetchImage);
 
-        GridLayoutManager layoutManager=new GridLayoutManager(this,2);
+        GridLayoutManager layoutManager = new GridLayoutManager(this,2);
         binding.recyCategory.setLayoutManager(layoutManager);
-        adapters=new CategoryAdapters(this,list);
+
+        adapter =new CategoryAdapter(this,list);
+        binding.recyCategory.setAdapter(adapter);
         database.getReference().child("categories").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists())
-                {
-                    for(DataSnapshot dataSnapshot: snapshot.getChildren())
+                if (snapshot.exists()){
+                    list.clear();
+                    for (DataSnapshot dataSnapshot:snapshot.getChildren()){
+                        list.add(new CategoryModel(
+                                 dataSnapshot.child("categoryName").getValue().toString(),
+                                dataSnapshot.child("categoryImage").getValue().toString(),
+                                dataSnapshot.getKey(),
+                                Integer.parseInt(dataSnapshot.child("setNum").getValue().toString())
+                        ));
+                    }
+                    adapter.notifyDataSetChanged();
                 }
                 else
                 {
