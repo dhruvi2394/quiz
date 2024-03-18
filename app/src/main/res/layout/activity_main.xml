@@ -5,6 +5,7 @@
     android:id="@+id/textview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     android:fitsSystemWindows="true"
     tools:context=".MainActivity">
 
@@ -13,8 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#6a5be2"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
+        android:minHeight="64dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -40,6 +41,7 @@
         app:srcCompat="@drawable/add" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyCategory"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="1dp"

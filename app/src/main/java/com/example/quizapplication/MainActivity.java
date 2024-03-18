@@ -41,19 +41,19 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity {
 
-ActivityMainBinding binding;
- FirebaseDatabase database;
- FirebaseStorage storage;
- CircleImageView CategoryImage;
- EditText InputCategoryName;
- Button uploadCategory;
- View fetchImage;
- Dialog dialog;
- Uri imageUri;
- int i=0;
- ArrayList<CategoryModel>list;
- CategoryAdapter adapter;
- ProgressDialog progressDialog;
+    ActivityMainBinding binding;
+    FirebaseDatabase database;
+    FirebaseStorage storage;
+    CircleImageView CategoryImage;
+    EditText InputCategoryName;
+    Button uploadCategory;
+    View fetchImage;
+    Dialog dialog;
+    Uri imageUri;
+    int i=0;
+    ArrayList<CategoryModel>list;
+    CategoryAdapter adapter;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +94,7 @@ ActivityMainBinding binding;
                     list.clear();
                     for (DataSnapshot dataSnapshot:snapshot.getChildren()){
                         list.add(new CategoryModel(
-                                 dataSnapshot.child("categoryName").getValue().toString(),
+                                dataSnapshot.child("categoryName").getValue().toString(),
                                 dataSnapshot.child("categoryImage").getValue().toString(),
                                 dataSnapshot.getKey(),
                                 Integer.parseInt(dataSnapshot.child("setNum").getValue().toString())
@@ -207,8 +207,3 @@ ActivityMainBinding binding;
         }
     }
 }
-
-
-
-
-

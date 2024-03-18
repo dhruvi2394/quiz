@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 import android.content.Context;
+
 import com.example.quizapplication.Adapter.GrideAdapter;
 import com.example.quizapplication.databinding.ActivitySetsBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -45,15 +46,15 @@ public class SetsActivity extends AppCompatActivity {
 
                             public void onComplete(@NonNull Task<Void> task) {
 
-                               if(task.isSuccessful())
-                               {
-                                   adapter.sets++;
-                                   adapter.notifyDataSetChanged();
-                               }
-                               else {
-                                   Toast.makeText(SetsActivity.this,task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                               }
-                               }
+                                if(task.isSuccessful())
+                                {
+                                    adapter.sets++;
+                                    adapter.notifyDataSetChanged();
+                                }
+                                else {
+                                    Toast.makeText(SetsActivity.this,task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
                         });
             }
         });
